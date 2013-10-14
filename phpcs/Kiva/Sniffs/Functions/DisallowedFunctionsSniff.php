@@ -19,6 +19,12 @@ class Kiva_Sniffs_Functions_DisallowedFunctionsSniff implements PHP_CodeSniffer_
 				$reported[$lno] = true;
 				$phpcsFile->addError('elpr() function left in code', $stackPtr);
 			}
+		} else if ($all_tokens[$stackPtr]['content'] == 'time') {
+			$lno = $all_tokens[$stackPtr]['line'];
+			if (!isset($reported[$lno])) {
+				$reported[$lno] = true;
+				$phpcsFile->addError('Usage of time() forbidden. Use Bc_Date::now() instead.', $stackPtr);
+			}
 		}
 	}
 }
