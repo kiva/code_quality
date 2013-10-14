@@ -23,7 +23,7 @@ class Kiva_Sniffs_Functions_DisallowedFunctionsSniff implements PHP_CodeSniffer_
 			$lno = $all_tokens[$stackPtr]['line'];
 			if (!isset($reported[$lno])) {
 				$reported[$lno] = true;
-				$phpcsFile->addError('Usage of time() forbidden. Use Bc_Date::now() instead.', $stackPtr);
+				$phpcsFile->addError('Usage of time() forbidden. Use Bc_Date::now()->asTimestamp() instead.', $stackPtr);
 			}
 		}
 	}
