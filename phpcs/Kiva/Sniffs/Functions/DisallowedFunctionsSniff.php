@@ -29,6 +29,11 @@ class Kiva_Sniffs_Functions_DisallowedFunctionsSniff implements PHP_CodeSniffer_
 				$reported[$lno] = true;
 				$phpcsFile->addError('Usage of error_log() forbidden. Use Bc_Logger instead with the right channel.', $stackPtr);
 			}
+		} else if ($all_tokens[$stackPtr]['content'] == 'extract') {
+			if (!isset($reported[$lno])) {
+				$reported[$lno] = true;
+				$phpcsFile->addError('Usage of extract() forbidden.', $stackPtr);
+			}
 		}
 	}
 }
