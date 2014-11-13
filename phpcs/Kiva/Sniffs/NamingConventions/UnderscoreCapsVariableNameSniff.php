@@ -17,13 +17,13 @@ class Kiva_Sniffs_NamingConventions_UnderscoreCapsVariableNameSniff extends PHP_
 	}
 
 	protected function processVariableInString(PHP_CodeSniffer_File $phpcsFile, $stackPtr) {
-		$this->_process($phpcsFile, $stackPtr);
+		// Ignore these
 	}
 
 	public function _process(PHP_CodeSniffer_File $phpcsFile, $stackPtr) {
 		$all_tokens = $phpcsFile->getTokens();
 
-		if (preg_match("/^[a-zA-Z]*[A-Z]+.*/", substr($all_tokens[$stackPtr]['content'],1))) {
+		if (preg_match("/^[a-z]+[A-Z]+/", substr($all_tokens[$stackPtr]['content'],1))) {
 			$error = 'Variable name "%s" is not in underscore caps format';
 			$data  = array(
 			$all_tokens[$stackPtr]['content']
