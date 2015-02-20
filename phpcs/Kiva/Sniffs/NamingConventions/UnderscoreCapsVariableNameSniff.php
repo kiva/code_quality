@@ -28,7 +28,7 @@ class Kiva_Sniffs_NamingConventions_UnderscoreCapsVariableNameSniff extends PHP_
 			$data  = array(
 			$all_tokens[$stackPtr]['content']
 						 );
-			$phpcsFile->addError($error, $stackPtr, 'NotUnderscoreCaps', $data);
+			$phpcsFile->addWarning($error, $stackPtr, 'NotUnderscoreCaps', $data);
 			return;
 		}
 	}
