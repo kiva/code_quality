@@ -20,13 +20,19 @@ class Kiva_Sniffs_Functions_DisallowedVariablesSniff implements PHP_CodeSniffer_
 				$phpcsFile->addError('Accessing $_COOKIE directly is forbidden. Use Bc_Cookie instead.', $stackPtr);
 			}
 		} else if ($all_tokens[$stackPtr]['content'] == '$_SERVER') {
-			if ($all_tokens[$stackPtr+2]['type'] == 'T_CONSTANT_ENCAPSED_STRING'
-				&& strstr($all_tokens[$stackPtr+2]['content'], 'REMOTE_ADDR')) {
-
-				$lno = $all_tokens[$stackPtr]['line'];
-				if (!isset($reported[$lno])) {
-					$reported[$lno] = true;
-					$phpcsFile->addError('Accessing $_SERVER[\'REMOTE_ADDR\'] directly is forbidden. Use Bc_DeviceDetect instead.', $stackPtr);
+			if ($all_tokens[$stackPtr+2]['type'] == 'T_CONSTANT_ENCAPSED_STRING') {
+				if (strstr($all_tokens[$stackPtr+2]['content'], 'REMOTE_ADDR')) {
+					$lno = $all_tokens[$stackPtr]['line'];
+					if (!isset($reported[$lno])) {
+						$reported[$lno] = true;
+						$phpcsFile->addError('Accessing $_SERVER[\'REMOTE_ADDR\'] directly is forbidden. Use Bc_Request::getIp() instead.', $stackPtr);
+					}
+				} else if (strstr($all_tokens[$stackPtr+2]['content'], 'HTTP_USER_AGENT')) {
+					$lno = $all_tokens[$stackPtr]['line'];
+					if (!isset($reported[$lno])) {
+						$reported[$lno] = true;
+						$phpcsFile->addError('Accessing $_SERVER[\'HTTP_USER_AGENT\'] directly is forbidden. Use Bc_Request::getUserAgent() instead.', $stackPtr);
+					}
 				}
 			}
 		}
