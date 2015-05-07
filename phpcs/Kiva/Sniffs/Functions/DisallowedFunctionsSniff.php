@@ -4,6 +4,18 @@ class Kiva_Sniffs_Functions_DisallowedFunctionsSniff implements PHP_CodeSniffer_
 
 	public $supportedTokenizers = array('PHP');
 
+	private $forbiddenTokens = array(
+		 'elpr'                  => 'elpr() function left in code'
+		,'time'                  => 'Usage of time() forbidden. Use Bc_Date::now()->asTimestamp() instead.'
+		,'error_log'             => 'Usage of error_log() forbidden. Use Bc_Logger instead with the right channel.'
+		,'extract'               => 'Usage of extract() forbidden.'
+		,'session_id'            => 'Usage of session_id() forbidden. Use Bc_Session::getId() instead.'
+		,'session_regenerate_id' => 'Usage of session_regenerate_id() forbidden. Use Bc_Session::regenerateId() instead.'
+		,'session_name'          => 'Usage of session_name() forbidden. Use Bc_Session::getName() instead.'
+		,'session_destroy'       => 'Usage of session_destroy() forbidden. Use Bc_Session::destroy() instead.'
+		,'session_unset'         => 'Usage of session_unset() forbidden. Use Bc_Session::clear() instead.'
+	);
+
 	public function register() {
 	    return array(T_STRING);
 	}
@@ -12,27 +24,14 @@ class Kiva_Sniffs_Functions_DisallowedFunctionsSniff implements PHP_CodeSniffer_
 		static $reported = array();
 
 		$all_tokens = $phpcsFile->getTokens();
-
 		$lno = $all_tokens[$stackPtr]['line'];
-		if ($all_tokens[$stackPtr]['content'] == 'elpr') {
-			if (!isset($reported[$lno])) {
-				$reported[$lno] = true;
-				$phpcsFile->addError('elpr() function left in code', $stackPtr);
-			}
-		} else if ($all_tokens[$stackPtr]['content'] == 'time') {
-			if (!isset($reported[$lno])) {
-				$reported[$lno] = true;
-				$phpcsFile->addError('Usage of time() forbidden. Use Bc_Date::now()->asTimestamp() instead.', $stackPtr);
-			}
-		} else if ($all_tokens[$stackPtr]['content'] == 'error_log') {
-			if (!isset($reported[$lno])) {
-				$reported[$lno] = true;
-				$phpcsFile->addError('Usage of error_log() forbidden. Use Bc_Logger instead with the right channel.', $stackPtr);
-			}
-		} else if ($all_tokens[$stackPtr]['content'] == 'extract') {
-			if (!isset($reported[$lno])) {
-				$reported[$lno] = true;
-				$phpcsFile->addError('Usage of extract() forbidden.', $stackPtr);
+
+		foreach ($this->forbiddenTokens as $token => $message) {
+			if($all_tokens[$stackPtr]['content'] == $token) {
+				if (!isset($reported[$lno])) {
+					$reported[$lno] = true;
+					$phpcsFile->addError($message, $stackPtr);
+				}
 			}
 		}
 	}
