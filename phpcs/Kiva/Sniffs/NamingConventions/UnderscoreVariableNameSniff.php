@@ -4,9 +4,9 @@ if (class_exists('PHP_CodeSniffer_Standards_AbstractScopeSniff', true) === false
 }
 
 /**
- * Kiva_Sniffs_NamingConventions_UnderscoreCapsVariableNameSniff
+ * Kiva_Sniffs_NamingConventions_UnderscoreVariableNameSniff
  */
-class Kiva_Sniffs_NamingConventions_UnderscoreCapsVariableNameSniff extends PHP_CodeSniffer_Standards_AbstractVariableSniff {
+class Kiva_Sniffs_NamingConventions_UnderscoreVariableNameSniff extends PHP_CodeSniffer_Standards_AbstractVariableSniff {
 
 	protected function processMemberVar(PHP_CodeSniffer_File $phpcsFile, $stackPtr) {
 		$this->_process($phpcsFile, $stackPtr);
@@ -28,7 +28,7 @@ class Kiva_Sniffs_NamingConventions_UnderscoreCapsVariableNameSniff extends PHP_
 			$data  = array(
 			$all_tokens[$stackPtr]['content']
 						 );
-			$phpcsFile->addError($error, $stackPtr, 'NotUnderscoreCaps', $data);
+			$phpcsFile->addError($error, $stackPtr, 'NotUnderscoreVariableName', $data);
 			return;
 		}
 	}
