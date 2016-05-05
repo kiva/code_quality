@@ -24,11 +24,11 @@ class Kiva_Sniffs_NamingConventions_UnderscoreCapsVariableNameSniff extends PHP_
 		$all_tokens = $phpcsFile->getTokens();
 
 		if (preg_match("/^[a-z]+[A-Z]+/", substr($all_tokens[$stackPtr]['content'],1))) {
-			$error = 'Variable name "%s" is not in underscore caps format';
+			$error = 'Variable name "%s" is not in under_score format';
 			$data  = array(
 			$all_tokens[$stackPtr]['content']
 						 );
-			$phpcsFile->addWarning($error, $stackPtr, 'NotUnderscoreCaps', $data);
+			$phpcsFile->addError($error, $stackPtr, 'NotUnderscoreCaps', $data);
 			return;
 		}
 	}
