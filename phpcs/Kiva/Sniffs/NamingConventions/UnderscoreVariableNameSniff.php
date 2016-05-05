@@ -4,9 +4,9 @@ if (class_exists('PHP_CodeSniffer_Standards_AbstractScopeSniff', true) === false
 }
 
 /**
- * Kiva_Sniffs_NamingConventions_UnderscoreCapsVariableNameSniff
+ * Kiva_Sniffs_NamingConventions_UnderscoreVariableNameSniff
  */
-class Kiva_Sniffs_NamingConventions_UnderscoreCapsVariableNameSniff extends PHP_CodeSniffer_Standards_AbstractVariableSniff {
+class Kiva_Sniffs_NamingConventions_UnderscoreVariableNameSniff extends PHP_CodeSniffer_Standards_AbstractVariableSniff {
 
 	protected function processMemberVar(PHP_CodeSniffer_File $phpcsFile, $stackPtr) {
 		$this->_process($phpcsFile, $stackPtr);
@@ -24,11 +24,11 @@ class Kiva_Sniffs_NamingConventions_UnderscoreCapsVariableNameSniff extends PHP_
 		$all_tokens = $phpcsFile->getTokens();
 
 		if (preg_match("/^[a-z]+[A-Z]+/", substr($all_tokens[$stackPtr]['content'],1))) {
-			$error = 'Variable name "%s" is not in underscore caps format';
+			$error = 'Variable name "%s" is not in under_score format';
 			$data  = array(
 			$all_tokens[$stackPtr]['content']
 						 );
-			$phpcsFile->addWarning($error, $stackPtr, 'NotUnderscoreCaps', $data);
+			$phpcsFile->addError($error, $stackPtr, 'NotUnderscoreVariableName', $data);
 			return;
 		}
 	}
