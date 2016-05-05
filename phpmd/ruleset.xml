@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<ruleset name="Kiva PHPMD rule set">
+
+	<rule ref="rulesets/cleancode.xml">
+		<exclude name="ElseExpression" />
+		<exclude name="StaticAccess" />
+	</rule>
+	<rule ref="rulesets/cleancode.xml/StaticAccess">
+		<properties>
+			<property name="exceptions" value="BC,PSC,KV,API,UTILS,Bc_Money,Bc_Date,Bc_Exception,Bc_Result" />
+		</properties>
+	</rule>
+	
+	<rule ref="rulesets/codesize.xml" />
+	<!--<rule ref="rulesets/controversial.xml" />-->
+	<rule ref="rulesets/design.xml" />
+	<!--<rule ref="rulesets/naming.xml" />-->
+	<rule ref="rulesets/unusedcode.xml" />
+
+</ruleset>
