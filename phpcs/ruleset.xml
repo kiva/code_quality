@@ -11,19 +11,11 @@
 	</rule>
 	<rule ref="PSR2">
 		<exclude name="Generic.WhiteSpace.DisallowTabIndent"/> <!-- tabs is our standard, even though spaces is more common... -->
-		<exclude name="Generic.WhiteSpace.ScopeIndent"/> <!-- exclude this version of the rule to implement a custom version below -->
 		<exclude name="Squiz.Classes.ValidClassName"/> <!-- This goes along with the MissingNamespace rule: if we had namespaces, then we wouldn't prefix our class names -->
 		<exclude name="Squiz.Functions.MultiLineFunctionDeclaration.BraceOnSameLine"/> <!-- Kiva's standard is function opening curly brace on same line (see K&R rule below) -->
 	</rule>
 	<rule ref="Generic.WhiteSpace.DisallowSpaceIndent"/>
-	<rule ref="Generic.WhiteSpace.ScopeIndent">
-		<properties>
-			<property name="indent" value="4"/>
-			<property name="tabIndent" value="true"/>
-		</properties>
-	</rule>
 	<rule ref="Generic.Functions.OpeningFunctionBraceKernighanRitchie"/>
-
 
 	<rule ref="./Kiva"/> <!-- Kiva's Custom Code Sniffs -->
 
