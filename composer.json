@@ -1,4 +1,5 @@
 {
   "name": "kiva/code_quality",
-  "description": "Configurations for the PHP Quality Assurance Toolchain"
+  "description": "Configurations for the PHP Quality Assurance Toolchain",
+  "minimum-stability": "stable"
 }
